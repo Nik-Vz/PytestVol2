@@ -15,9 +15,11 @@ class TestUI:
     def setup_method(self):
         self.driver = webdriver.Chrome()
 
-    def test_open_yandex_main_page(self):
-        self.driver.get("URL")
-        assert self.driver.
+    @pytest.mark.element
+    def test_element_on_page(self):
+        self.driver.get(self.URL)
+        time.sleep(2)
+        assert self.driver.find_element(*self.LOGIN_BUTTON), "LOGIN_BUTTON NOT FOUND"
 
     @pytest.mark.login
     def test_login(self):
