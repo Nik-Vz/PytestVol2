@@ -11,6 +11,7 @@ class TestUI:
     PASSWORD_FIELD = ("xpath", "//input[@name='password']")
     URL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
     LOGIN_BUTTON = ("xpath", "//button[@type='submit']")
+    LINK_TO_REG_FORM = ("xpath", "//a[text()='Регистрация']")
 
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -31,6 +32,17 @@ class TestUI:
         assert (
             self.driver.current_url
             == "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
+        )
+
+    @pytest.mark.navigation
+    def test_page_navigation(self):
+        self.driver.get("https://mail.ru/")
+        time.sleep(2)
+        self.driver.find_element(*self.LINK_TO_REG_FORM).click()
+        time.sleep(2)
+
+        assert (
+            "https://account.mail.ru/signup?app_id_mytracker" in self.driver.current_url
         )
 
     def teardown_method(self):

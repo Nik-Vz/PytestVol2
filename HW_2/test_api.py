@@ -17,6 +17,9 @@ class TestAPI:
     def test_status_code(self):
         assert self.response.status_code == 200
 
+    def test_response_body_not_empty(self):
+        assert self.response.content != None
+
     def test_content(self):
         assert 'href="https://github.com/typicode/json-server"' in self.response.text
 
